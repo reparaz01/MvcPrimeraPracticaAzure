@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MvcPrimeraPracticaAzure.Models.Personaje>
+
+@{
+    ViewData["Title"] = "PeliculasGenero";
+    var series = ViewData["SERIES"] as List<string>;
+}
+
+<h1>PersonajesSerie</h1>
+
+<form method="post">
+    <label>Selecciona una serie</label>
+    <select name="id">
+        @foreach (string serie in series)
+        {
+            <option value="@serie">@serie</option>
+        }
+    </select>
+    <button class="btn btn-outline-primary">
+        Buscar
+    </button>
+</form>
+
+
+@if(Model != null)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IdPersonaje)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        Imagen
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Serie)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="align-middle">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdPersonaje)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            <img src="@item.Imagen" class="img-thumbnail" alt="Imagen de @item.Nombre" style="width: 250px; height: 250px;" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Serie)
+                        </td>
+                        <td class="align-middle">
+                            <!-- Alinea verticalmente los botones -->
+                            <div class="btn-group-vertical">
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
